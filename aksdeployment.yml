@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rkaksdep
+spec:
+  selector:
+    matchLabels:
+      app: rkaksdep
+  template:
+    metadata:
+      labels:
+        app: rkaksdep
+    spec:
+      containers:
+      - name: rkaksdep
+        image: rkdevacr.azurecr.io/rkaksdep:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rkaksdep
+spec:
+  selector:
+    app: rkaksdep
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
