@@ -10,50 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout GitHub repo
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  # Fetch the full history to avoid shallow clone issues
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch full history to avoid shallow clone issues
 
-    - name: Set up Git
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-    - name: Push to Azure DevOps
-      env:
-        AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
-      run: |
-        # Add Azure DevOps repository as a remote
-        git remote add azure https://name: Push to Azure DevOps
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
-on:
-  push:
-    branches:
-      - main  # Trigger the workflow on pushes to the 'main' branch
+      - name: Add Azure DevOps remote
+        env:
+          AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
+        run: |
+          git remote add azure https://venubura123:${AZURE_DEVOPS_PAT}@dev.azure.com/venubura123/aparna/_git/demorepo
+          git remote -v
 
-jobs:
-  push-code:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout GitHub repo
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  # Fetch the full history to avoid shallow clone issues
-
-    - name: Set up Git
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-    - name: Push to Azure DevOps
-      env:
-        AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
-      run: |
-        # Add Azure DevOps repository as a remote
-        git remote add azure https://9uZgDGbhdgJQHitbY1rCx0TROW0G6VelSeLG3BcwhS9lRRVyC4ZLJQQJ99BBACAAAAAr66ZhAAASAZDO37RZ:x-oauth-basic@dev.azure.com/venubura123/Lucky project
-
-/_git/demo repo
-        # Push changes to Azure DevOps
-        git push azure main --force:x-oauth-basic@dev.azure.com/venubura123/nani/_git/demogit
-        # Push changes to Azure DevOps
-        git push azure main --force
+      - name: Push to Azure DevOps
+        run: |
+          git push azure main --force
