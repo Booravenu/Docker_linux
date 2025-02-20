@@ -24,7 +24,8 @@ jobs:
         AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
       run: |
         # Add Azure DevOps repository as a remote
-        git remote add azure https://57KLWz48KtbwHnlmZqozdKrydEseZcQGqggzZwy9NSpSqbyaXUY0JQQJ99BBACAAAAAr66ZhAAASAZDO1slz:x-oauth-basic@dev.azure.com/venubura123/Lucky project
-        /_git/demo repo
+        git remote add azure https://57KLWz48KtbwHnlmZqozdKrydEseZcQGqggzZwy9NSpSqbyaXUY0JQQJ99BBACAAAAAr66ZhAAASAZDO1slz:x-oauth-basic@dev.azure.com/venubura123/aparna
+        /_git/demorepo
+        
         # Push changes to Azure DevOps
         git push azure main --force
